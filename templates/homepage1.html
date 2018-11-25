@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+{% include "header1.html" %}
+
+<div class="row" style="width:800px; margin:0 auto;">
+  <div>
+    <h2>Categories</h2>
+    {% for c in categories %}
+    <div>
+      <p>
+        <a href="/categories/{{c.id}}">{{c.name}}</a>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+  
+  <div>
+    <h2>Latest Items</h2>
+    {% for i in items %}
+    <div>
+     <a href="/categories/{{i.category_id}}/item/{{i.id}}">{{i.name}}</a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+</body>
+</html>
