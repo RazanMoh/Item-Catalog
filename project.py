@@ -286,7 +286,7 @@ def editItem(category_id, item_id):
         return redirect(url_for('showCategoryItems',
                                 category_id=editedItem.category.id))
     else:
-        return render_template('edititem.html',
+        return render_template('editItem.html',
                                item=editedItem, categories=categories,
                                login_session=login_session)
 
@@ -332,6 +332,13 @@ def allItemsJSON():
         if items:
             category_dict[c]["Item"] = items
     return jsonify(Category=category_dict)
+
+
+@app.route('/categories/<path:category_id>/items/JSON')
+def categoryItemsJSON(category_id):
+    category = session.query(Category).filter_by(id=category_id).one()
+    items = session.query(Item).filter_by(category=category).all()
+    return jsonify(items=[i.serialize for i in items])
 
 
 if __name__ == '__main__':
